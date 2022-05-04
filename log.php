@@ -35,20 +35,9 @@
   }
 
   function send_sms($msg, $phone){
-    $token = 'halla202011';
-    $ipGateway = '10.100.1.141';
-    $url = 'http://' . $ipGateway . ':8766/?number='. $phone .'&message='. $msg .'&token='. $token;
+    $url = '';
 
-    /*
-    $curl = curl_init($url);
-    curl_setopt($curl, CURLOPT_URL, $url);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-
-    $resp = curl_exec($curl);
-    curl_close($curl);
-    */
     file_get_contents($url);
-    // var_dump($resp);
   }
 
   function get_countDaily(){
@@ -71,12 +60,9 @@
   }
 
   function send_telgram($num_daily){
-    $url = 'https://api.telegram.org/bot1477259072:AAFC2FrgnLBtSn3iRyeAVwr7NiLQei-FQVY/sendMessage?chat_id=-1001362035270&text=' . 'Count SMS Today = '. $num_daily;
+    $url = '';
 
     file_get_contents($url);
-
-    echo $num_daily;
-    echo $resp;
   }
 
   function get_smsdaily(){
