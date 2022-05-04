@@ -64,9 +64,12 @@
         <title>Message</title>
 
         <style>
+            body{
+                font-family: sans-serif;
+            }
             .message {
                 margin: auto;
-                font-family: Arial, Helvetica, sans-serif;
+                font-family: sans-serif;
                 border-collapse: collapse;
                 width: 80%;
             }
@@ -75,6 +78,7 @@
                 border: 1px solid #ddd;
                 padding: 8px;
                 text-align: center;
+                direction: rtl;
             }
 
             .message tr:nth-child(even){background-color: #f2f2f2;}
@@ -92,10 +96,32 @@
             .paging{
                 text-align: center;
             }
+
+            .paging a, .paging span {
+                color: black;
+                padding: 8px 16px;
+                text-decoration: none;
+            }
+
+            .paging a.active {
+                background-color: #4CAF50;
+                color: white;
+            }
+
+            .paging a:hover:not(.active) {background-color: #ddd;}
+
+            .disabled{
+                display: none;
+            }
+
+            .copyright{
+                width: 100%;
+                text-align: center;
+            }
         </style>
     </head>
     <body>
-        <h4><a href="logout.php">Logout</a></h4>
+        
         <table class="message">
             <tr>
                 <th>#</td>
@@ -103,7 +129,13 @@
                 <th>Phone</td>
                 <th>Message</td>
             </tr>
-            <?php $i = 1; ?>
+            <?php 
+                if($_GET['page'] == 1)
+                    $i = 1; 
+                else
+                    $i = 25 * ($_GET['page'] - 1) + 1; 
+            
+            ?>
             <?php if($iterator) { ?>
                 <?php foreach ($iterator as $row) { ?>
                     <tr>
@@ -116,6 +148,36 @@
             <?php } ?>
         </table>
 
-        <?php echo '<div class="paging"><p>', $prevlink, ' Page ', $page, ' of ', $pages, ' pages, displaying ', $start, '-', $end, ' of ', $total, ' results ', $nextlink, ' </p></div>'; ?>
+        <div class="paging">
+            <p>
+                <?php 
+                    echo $prevlink;
+
+                    if($_GET['page'] - 4 > 1)
+                        $startPage = $_GET['page'] - 4;
+                    else
+                        $startPage = 0;
+
+                    $range_pages = $startPage + 6;
+
+                    for($i=$startPage; $i < $range_pages and $i < $pages; $i++)
+                    {
+                        if($i + 1 == $_GET['page'])
+                            echo ' <a class="active" href="?page=',$i + 1,'">', $i + 1, '</a> ';
+                        else
+                            echo ' <a href="?page=',$i + 1,'">', $i + 1, '</a> ';
+                    }
+                    // echo ' Page ', $page, ' of ', $pages, ' pages, displaying ', $start, '-', $end, ' of ', $total, ' results ';
+                    echo $nextlink; 
+                ?>
+            </p>
+        </div>
+
+        <div class="copyright">
+            <a href="logout.php">Logout</a><br>
+            copyright <a href="http://codelab.ly">codelab</a> <?php echo date("Y"); ?>
+        </div>
+        <h4></h4>
+        <h4></h4>
     </body>
 </html>
