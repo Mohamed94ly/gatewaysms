@@ -130,7 +130,7 @@
                 <th>Message</td>
             </tr>
             <?php 
-                if($_GET['page'] == 1)
+                if($_GET['page'] == 1 || !isset($_GET['page']))
                     $i = 1; 
                 else
                     $i = 25 * ($_GET['page'] - 1) + 1; 
