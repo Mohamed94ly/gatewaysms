@@ -115,8 +115,10 @@
             }
 
             .copyright{
+                margin-top: 25px;
                 width: 100%;
                 text-align: center;
+                line-height: 1.5;
             }
         </style>
     </head>
@@ -174,8 +176,10 @@
         </div>
 
         <div class="copyright">
+            <a href="show.php">Home</a>&#9 | &#9
+            <a href="statistics.php">Statistics</a>&#9 | &#9
             <a href="logout.php">Logout</a><br>
-            copyright <a href="http://codelab.ly">codelab</a> <?php echo date("Y"); ?>
+            Copyright &copy;<?php echo date("Y"); ?>. <a href="http://codelab.ly">CodeLab</a>
         </div>
         <h4></h4>
         <h4></h4>
