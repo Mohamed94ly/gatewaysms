@@ -2,7 +2,8 @@
     session_start();
 
     if(isset($_POST['username'])){
-        login($_POST['username'], $_POST['password']);
+        $pass = md5($_POST['password']);
+        login($_POST['username'], $pass);
     }else if(isset($_SESSION['user_login'])){
         checkUser($_SESSION['user_login']);
     }
